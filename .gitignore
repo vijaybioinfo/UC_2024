@@ -35,6 +35,7 @@ vignettes/*.pdf
 /cache/
 __pycache__/
 archive/
+.archive
 
 # Big files and folders
 *.h5ad
