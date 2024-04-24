@@ -8,7 +8,7 @@ REQUIREMENTS
 This project requires the following software:
 
 * [Cell Ranger](https://www.10xgenomics.com/support/software/cell-ranger/latest)
-* [Seurat]([https://www.alink.org/mod2](https://satijalab.org/seurat/))
+* [Seurat](https://www.alink.org/mod2](https://satijalab.org/seurat/))
 * [Scrublet](https://github.com/swolock/scrublet)
 * [MAST](https://rglab.github.io/MAST/)
 
