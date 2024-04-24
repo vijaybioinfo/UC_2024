@@ -11,6 +11,7 @@ This project requires the following software:
 * [Seurat](https://www.alink.org/mod2](https://satijalab.org/seurat/))
 * [Scrublet](https://github.com/swolock/scrublet)
 * [MAST](https://rglab.github.io/MAST/)
+* [In-house DGEA](https://github.com/vijaybioinfo/dgea)
 
 MAINTAINERS
 -----------
