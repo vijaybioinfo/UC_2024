@@ -1,0 +1,127 @@
+project: runs25to28_clean1_ccreg
+method: mastlog2cpm
+metadata: /home/ciro/ad_hoc/ucolitis/results/figures/metadata.rds
+expression_data: /home/ciro/large/ucolitis/results/clustering/runs25to28_clean1_ccreg/.object_stem_seurat_mean0.01_pct20.rds
+output_dir: /home/ciro/ad_hoc_temp/ucolitis/results/dgea
+comparisons:
+  celltype_inflammation0_CD4.T.H..17:
+    context: celltype_inflammation0_CD4.T.H..17
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved
+    filters:
+      celltype_subset: CD4~T[H]*17
+    job:
+      mem: 40gb
+  celltype_inflammation1_CD4.T.H..17:
+    context: celltype_inflammation1_CD4.T.H..17
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved~Uninflamed
+    filters:
+      celltype_subset: CD4~T[H]*17
+    job:
+      mem: 40gb
+  celltype_inflammation0_CD8.T.H..17:
+    context: celltype_inflammation0_CD8.T.H..17
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved
+    filters:
+      celltype_subset: CD8~T[H]*17
+    job:
+      mem: 40gb
+  celltype_inflammation1_CD8.T.H..17:
+    context: celltype_inflammation1_CD8.T.H..17
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved~Uninflamed
+    filters:
+      celltype_subset: CD8~T[H]*17
+    job:
+      mem: 40gb
+  celltype_inflammation0_CD4.T.FH.:
+    context: celltype_inflammation0_CD4.T.FH.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved
+    filters:
+      celltype_subset: CD4~T[FH]
+    job:
+      mem: 40gb
+  celltype_inflammation1_CD4.T.FH.:
+    context: celltype_inflammation1_CD4.T.FH.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved~Uninflamed
+    filters:
+      celltype_subset: CD4~T[FH]
+    job:
+      mem: 40gb
+  celltype_inflammation0_CD8.T.FH.:
+    context: celltype_inflammation0_CD8.T.FH.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved
+    filters:
+      celltype_subset: CD8~T[FH]
+    job:
+      mem: 40gb
+  celltype_inflammation1_CD8.T.FH.:
+    context: celltype_inflammation1_CD8.T.FH.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved~Uninflamed
+    filters:
+      celltype_subset: CD8~T[FH]
+    job:
+      mem: 40gb
+  celltype_inflammation0_CD4.T.REG.-CD4.T.REF.:
+    context: celltype_inflammation0_CD4.T.REG.-CD4.T.REF.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved
+    filters:
+      celltype_subset:
+      - CD4~T[REG]
+      - CD4~T[REF]
+    job:
+      mem: 40gb
+  celltype_inflammation1_CD4.T.REG.-CD4.T.REF.:
+    context: celltype_inflammation1_CD4.T.REG.-CD4.T.REF.
+    test_column: orig.group
+    contrast:
+    - Inflamed
+    - NonInvolved~Uninflamed
+    filters:
+      celltype_subset:
+      - CD4~T[REG]
+      - CD4~T[REF]
+    job:
+      mem: 40gb
+covariates: none
+down_sample: no
+padj_threshold: 0.05
+fc_threshold: 0.25
+ctrans: log2cpm
+colours: ./data/colours_df.csv
+job:
+  template: https://raw.githubusercontent.com/vijaybioinfo/cellranger_wrappeR/main/routine_template.sh
+  main:
+    walltime: '07:00:00'
+    mem: 16gb
+    ppn: 1
+    nodes: 1
+  depend: none
+  submit: no
+exec: Rscript
+script: /home/ciro/scripts/dgea/R/dgea.R

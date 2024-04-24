@@ -1,0 +1,43 @@
+project: YiLi03_f1
+method: mastlog2cpm
+metadata: /home/ciro/ad_hoc_temp/ucolitis/results/clustering/YiLi03_f1/cite_seq/metadata.rds
+expression_data: /home/ciro/ad_hoc/ucolitis/raw/cellranger/aggr/mm3/outs
+output_dir: /home/ciro/ad_hoc_temp/ucolitis/results/dgea
+comparisons:
+  perturbation_CD4:
+    context: perturbation_CD4
+    test_column: orig.library_condition
+    contrast:
+    - WT
+    - KO
+    filters:
+      celltype_citeseq: CD4
+    job:
+      mem: 80gb
+  perturbation_CD8:
+    context: perturbation_CD8
+    test_column: orig.library_condition
+    contrast:
+    - WT
+    - KO
+    filters:
+      celltype_citeseq: CD8
+    job:
+      mem: 80gb
+covariates: none
+down_sample: no
+padj_threshold: 0.05
+fc_threshold: 0.25
+ctrans: log2cpm
+colours: ./data/colours_df.csv
+job:
+  template: https://raw.githubusercontent.com/vijaybioinfo/cellranger_wrappeR/main/routine_template.sh
+  main:
+    walltime: '07:00:00'
+    mem: 16gb
+    ppn: 1
+    nodes: 1
+  depend: none
+  submit: no
+exec: Rscript
+script: /home/ciro/scripts/dgea/R/dgea.R

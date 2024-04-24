@@ -1,0 +1,26 @@
+---
+project: "ucolitis"
+cellranger: "/home/ciro/bin/cellranger-3.1.0/cellranger"
+run: "/mnt/NovaSeq/201016_A00475_0254_BH7VYFDSXY_NV035"
+fastqs_dir:
+  - "/mnt/BioAdHoc/Groups/vd-vijay/cramirez/hayley/raw/NV025"
+  - "/mnt/BioAdHoc/Groups/vd-vijay/cramirez/hayley/raw/NV026"
+  - "/mnt/BioAdHoc/Groups/vd-vijay/cramirez/hayley/raw/NV028"
+output_dir: "/home/ciro/large/ucolitis/raw/cellranger"
+# sample sheet or a pattern to select samples from 'fastqs_dir'
+samples: "JiCh"
+transcriptome:
+  count: "/mnt/BioAdHoc/Groups/vd-vijay/references/refdata-cellranger-hg19-3.0.0"
+  fbarcode: "/mnt/BioAdHoc/Groups/vd-vijay/references/refdata-cellranger-hg19-3.0.0"
+  vdj: /mnt/BioAdHoc/Groups/vd-vijay/references/refdata-cellranger-vdj-GRCh38-alts-ensembl-2.0.0
+feature_ref: # for Feature Barcoding libraries
+  main: "/home/ciro/ucolitis/info/fbarcodes.csv"
+aggregation: "/home/ciro/ucolitis/info/metadata_library.csv"
+job: # PBS settings
+  template: "/home/ciro/scripts/cellranger/routine_template.sh"
+  walltime: {count: 50:00:00, vdj: 40:00:00, fbarcode: 24:00:00}
+  mem: {count: 84gb, vdj: 40gb, fbarcode: 32gb}
+  ppn: {count: 12, vdj: 4, fbarcode: 4}
+  nodes: 1
+  submit: yes
+...

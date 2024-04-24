@@ -1,0 +1,17 @@
+---
+project_name: runs25to28
+# it can even be a CSV file like the one in a Cell Ranger aggregation
+input_expression: "/home/ciro/large/ucolitis/raw/cellranger/aggr/runs25to28"
+# A table of the metadata per library, or the whole metadata ready
+# it can be multiple file
+metadata: ["/home/ciro/ucolitis/info/metadata_library.csv","/home/ciro/large/ucolitis/results/ab_demux/runs25to28_100th/runs25to28.rds"]
+# if you don't add "/" at the end, it will append 'project_name'
+output_dir: "/home/ciro/large/ucolitis/results/quality_control/"
+# A file will sufice; columns must be metrics names in the metadata
+filtering:
+  file: "./data/file.csv"
+  nFeature_RNA: [300, 3000, 1]
+  nCount_RNA: [500, 9000, 1]
+  percent.mt: [-Inf, 15, 1]
+  expr: "orig.HT_ID.global %in% c('Singlet', NA)"
+...

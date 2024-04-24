@@ -1,0 +1,30 @@
+---
+project_id: runs25to28
+output_dir: "/mnt/BioAdHoc/Groups/vd-vijay/cramirez/ucolitis/results/ab_demux"
+sample_sheet: "no_file" # table with gex,capture,name
+# not necessary if you already have a sample_sheet, but this will create it with all feature barcode libraries
+count_info:
+  count_dir: /mnt/BioAdHoc/Groups/vd-vijay/cramirez/ucolitis/raw/cellranger/count
+  gex_data: filtered
+  fbarcode_data: raw
+demux:
+  max_count_min: 100
+  fold_change: 3
+  subset_tags: TSC
+# empty if you want to aggregate everything; or
+# path to cellranger aggregations (containing aggr1/outs aggr2/outs)
+aggregation:
+  source: /mnt/BioAdHoc/Groups/vd-vijay/cramirez/ucolitis/raw/cellranger/aggr
+  args: "--metadata=/home/ciro/ucolitis/info/metadata_donor.csv~donor"
+# Always include 'donor' as one of them.
+tag_str: donor~group~condition~hashtag # UAC731-Uninflamed-Remission-TSC9
+tag_delim: "-" # string use to separate the information in your hashtag names
+job:
+  walltime: 02:00:00
+  mem: 10gb
+  ppn: 1
+  nodes: 1
+  submit: no # yes, no, or force
+pipeline: ./
+exec_r: Rscript
+...

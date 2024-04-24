@@ -1,0 +1,10 @@
+---
+project_name: YiLi03_f1
+input_expression: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/raw/cellranger/aggr/mm3/outs/
+metadata: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/results/doublets/YiLi03/scrublet.rds
+output_dir: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/results/quality_control
+filtering:
+  nFeature_RNA: [500, 4000, 1]
+  nCount_RNA: [100, 15000, 1]
+  percent.mt: [-Inf, 4, 1]
+...

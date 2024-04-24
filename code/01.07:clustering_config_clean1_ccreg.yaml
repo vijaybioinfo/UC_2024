@@ -1,0 +1,41 @@
+---
+project_name: runs25to28_clean1_ccreg
+# path to the Cell Ranger ouput; it can even be a CSV file like the one in a Cell Ranger aggregation
+input_expression: "/home/ciro/large/ucolitis/raw/cellranger/aggr/runs25to28"
+# A table of the metadata per library, or the whole metadata ready.
+# It can be multiple files: [metadata_lib.csv, demultiplexed_hashtags.rdata]
+metadata: "/home/ciro/large/ucolitis/results/clustering/runs25to28_xdoublets/.object_meta.data_seurat_mean0.01_pct20_pc25.rds"
+# if you don't add "/" at the end, it will append 'project_name'
+output_dir: "/home/ciro/large/ucolitis/results/clustering/"
+filtering:
+  subset:
+    RNA_snn_res.0.4: ['-7', '-12', '-13']
+    orig.donor_nid: ['-N743']
+    expr: "nFeature_RNA >= 300 & nFeature_RNA <= 3000"
+    expre: "nCount_RNA >= 500 & nCount_RNA <= 9000"
+    expres: "percent.mt <= 15 & (orig.HT_ID.global %in% c('Singlet', NA))"
+    express: "doublet_scores <= 0.3"
+  nSamples_expressed: 0.001 # % of cells in which that gene is present
+regress_var: [nCount_RNA, percent.mt, S.Score, G2M.Score]
+norm: LogNormalize
+variable_features:
+  file: ./data/prot_coding_genes.csv
+  method: vst
+  nfeatures: 2000
+  percent: [15, 20, 25]  # iterated
+  mean.cutoff: [0.01, 8]
+  dispersion.cutoff: [1, Inf]
+resolution: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] # iterated during markers
+dim_reduction:
+  base: {type: pca, n_comp: 40, chosen_comp: [20, 25, 30]} # iterated: chosen
+  tsne: {perplexity: "auto", reduction.use: "pca"}
+  umap: {n.neighbors: 10, min.dist: 0.1}
+markers:
+  select: snn_res. # pattern in the metadata's columns
+  test: MAST
+  avg_logFC: 0.25
+  p_val_adj: 0.05
+tool: seurat
+pipeline: /home/ciro/scripts/clustering
+environment: clustering
+...

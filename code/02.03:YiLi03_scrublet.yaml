@@ -1,0 +1,11 @@
+---
+project_name: YiLi03
+input_matrix: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/raw/cellranger/aggr/mm3/outs/aggregation.csv
+metadata: /home/ciro/ucolitis/info/YiLi_metadata_library.csv
+output_dir: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/results/doublets
+filters:
+  score: 0.4
+  doublet_rate: 0.06
+vars:
+  library: origlib
+...

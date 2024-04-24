@@ -1,0 +1,12 @@
+---
+project_name: doubdet_test
+input_matrix: "/home/ciro/ad_hoc/ucolitis/raw/cellranger/count"
+metadata: "/home/ciro/ad_hoc/ucolitis/results/quality_control/runs25to28/metadata_prefilter.rdata"
+output_dir: "/home/ciro/ad_hoc/ucolitis/results/doublets/runs25to28"
+filters:
+  score: 0.3
+  doublet_rate: 0.06
+vars:
+  library: origlib
+  class: orig.HT_ID.global
+...

@@ -1,0 +1,23 @@
+---
+project: "ucolitis"
+run: ["/mnt/NovaSeq/220711_A00475_0486_BHVG7WDRXX_NV084", "/mnt/NovaSeq/220719_A00475_0492_BH3HTJDSX5_NGS_and_SeqTeam_NV085"]
+fastqs_dir: ["/mnt/BioAdHoc/Groups/vd-vijay/cramirez/seqteam/raw/NV084", "/mnt/BioAdHoc/Groups/vd-vijay/cramirez/seqteam/raw/NV085"]
+output_dir: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/raw/cellranger
+samples: YiLi03
+transcriptome:
+  count: /mnt/BioAdHoc/Groups/vd-vijay/references/refdata-cellranger-mm10-3.0.0
+  vdj: /mnt/BioAdHoc/Groups/vd-vijay/references/refdata-cellranger-vdj-GRCm38-alts-ensembl-3.1.0
+feature_ref:
+  main: /home/ciro/ucolitis/info/fbarcodes_NV084.csv
+aggregation: /home/ciro/ucolitis/info/YiLi_metadata_library.csv
+job:
+  template: "https://raw.githubusercontent.com/vijaybioinfo/cellranger_wrappeR/main/routine_template.sh"
+  walltime: {count: 50:00:00, vdj: 40:00:00, fbarcode: 24:00:00, aggr: 24:00:00}
+  mem: {count: 70gb, vdj: 40gb, fbarcode: 32gb, aggr: 30gb}
+  ppn: {count: 10, vdj: 4, fbarcode: 4, aggr: 6}
+  nodes: 1
+  depend: none
+  submit: yes
+cellranger: "/home/ciro/bin/cellranger-3.1.0/cellranger"
+pipeline: "./"
+...

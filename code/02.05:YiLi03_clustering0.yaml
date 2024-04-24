@@ -1,0 +1,34 @@
+---
+project_name: YiLi03_f1
+input_expression: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/raw/cellranger/aggr/mm3/outs/
+metadata: /mnt/BioAdHoc/Groups/vd-vijay/ciro/ucolitis/results/quality_control/YiLi03_f1/metadata_prefilter.rds
+output_dir: /mnt/bioadhoc-temp/Groups/vd-vijay/ciro/ucolitis/results/clustering/
+filtering:
+  subset: {expr: "nFeature_RNA >= 500 & nFeature_RNA <= 4000 & nCount_RNA >= 100 & nCount_RNA <= 15000 & percent.mt >= -Inf & percent.mt <= 4 & doublet_scores <= 0.4"}
+  nSamples_expressed: 0.001 # % of cells in which that gene is present
+regress_var: [nCount_RNA, percent.mt]
+norm: LogNormalize
+variable_features:
+  file: /home/ciro/scripts/clustering/data/prot_coding_genes.csv
+  method: vst
+  nfeatures: 2000
+  percent: [10, 15, 20, 25]  # iterated
+  mean.cutoff: [0.01, 8]
+  dispersion.cutoff: [1, Inf]
+resolution: [0.1, 0.2, 0.4, 0.6, 0.8] # iterated during markers
+dim_reduction:
+  base: {type: pca, n_comp: 40, chosen_comp: [10, 15, 25]} # iterated: chosen
+  tsne: {perplexity: 'auto', reduction.use: "pca"}
+  umap: {n.neighbors: 30, min.dist: 0.3}
+markers:
+  select: snn_res. # pattern in the metadata's columns
+  test: MAST
+  avg_logFC: 0.25
+  p_val_adj: 0.05
+tool: seurat
+script: /home/ciro/scripts/clustering/R/seurat.R
+exec: /share/apps/R/3.6.1/bin/Rscript
+pipeline: /home/ciro/scripts/clustering/
+cluster_config: /home/ciro/scripts/clustering/cluster.json
+environment: clustering
+...
